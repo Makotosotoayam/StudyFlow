@@ -8,10 +8,10 @@
    Seluruh link & teks kontak di halaman akan ikut berubah.
    --------------------------------------------------------- */
 const CONFIG = {
-  email: "halo@studyflow.example", // ganti dengan email kamu
+  email: "halo@studyflow.com", // ganti dengan email kamu
   whatsapp: "6281234567890", // format internasional tanpa +, contoh: 6281234567890
   whatsappLabel: "+62 812-3456-7890",
-  address: "[Alamat sekolah / kota Anda]",
+  address: "Jl. Raya No. 123, Cianjur",
   instagram: "https://www.instagram.com/",
   tiktok: "https://www.tiktok.com/",
   youtube: "https://www.youtube.com/",
