@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyFlow — Study Smarter. Stay Organized. Achieve More.</title>
+    <meta
+      name="description"
+      content="StudyFlow adalah study planner digital untuk pelajar SMA Indonesia: atur tugas, pantau deadline, susun jadwal belajar, dan lacak progres dalam satu tempat."
+    />
+    <meta name="theme-color" content="#6d4aff" />
+    <meta property="og:title" content="StudyFlow — Study Smarter. Stay Organized. Achieve More." />
+    <meta
+      property="og:description"
+      content="Satu tempat untuk semua tugas, deadline, jadwal, dan progres belajarmu. Mulai gratis."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236d4aff'/%3E%3Cstop offset='1' stop-color='%232f6bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M18 34c8 0 8-10 14-10s6 10 14 10M18 44c8 0 8-10 14-10s6 10 14 10' stroke='white' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- ============ SVG ICON SPRITE ============ -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-logo" viewBox="0 0 32 32">
+          <path d="M6 15c4.5 0 4.5-6 10-6s5.500 6 10 6M6 23c4.500 0 4.500-6 10-6s5.500 6 10 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" /></symbol>
+        <symbol id="i-tasks" viewBox="0 0 24 24"><rect x="4" y="3.500" width="16" height="17" rx="3.500" fill="none" stroke="currentColor" stroke-width="2" /><path d="M8.500 9.500l1.800 1.800 3.200-3.300M8.500 16h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 7.500V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15.500" rx="3.500" fill="none" stroke="currentColor" stroke-width="2" /><path d="M8 3v4M16 3v4M3.500 10h17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0112 0v6l1.500 2h-15L6 17zM10 21h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8.500a1.500 1.500 0 01-1.500 1.500H5.500A1.500 1.500 0 014 19.500V11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+        <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500" fill="none" stroke="currentColor" stroke-width="2" /><circle cx="12" cy="12" r="4.500" fill="none" stroke="currentColor" stroke-width="2" /><circle cx="12" cy="12" r="1" fill="currentColor" /></symbol>
+        <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 3.500 5.500 5.500 5.500 10.500A5.500 5.500 0 016.500 14c0-2 1-3.200 2-4 .2 1.500.8 2.300 1.600 2.800C10 9.500 10.500 6 12 3z" fill="currentColor" /></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3.500" fill="none" stroke="currentColor" stroke-width="2" /><path d="M4 8l8 5.500L20 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1115 4.200l1 4-4.200-1A8 8 0 014 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.200 7-11.500a7 7 0 10-14 0C5 14.800 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><circle cx="12" cy="9.500" r="2.500" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.700 5.600 6.100.9-4.400 4.300 1 6.100L12 17l-5.400 2.900 1-6.100L3.200 9.500l6.100-.9L12 3z" fill="currentColor" /></symbol>
+        <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800L12 3zM19 16l.8 2.200L22 19l-2.200.8L19 22l-.8-2.200L16 19l2.200-.8L19 16z" fill="currentColor" /></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></symbol>
+      </defs>
+    </svg>
+
+    <a class="skip-link" href="#konten-utama">Lewati ke konten utama</a>
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-header" id="header">
+      <div class="container nav-wrap">
+        <a href="#beranda" class="brand" aria-label="StudyFlow — kembali ke beranda">
+          <span class="brand-mark"><svg><use href="#i-logo" /></svg></span>
+          <span class="brand-name">StudyFlow</span>
+        </a>
+
+        <nav class="main-nav" id="main-nav" aria-label="Navigasi utama">
+          <ul>
+            <li><a href="#beranda" class="nav-link">Beranda</a></li>
+            <li><a href="#manfaat" class="nav-link">Manfaat</a></li>
+            <li><a href="#fitur" class="nav-link">Fitur</a></li>
+            <li><a href="#pratinjau" class="nav-link">Pratinjau</a></li>
+            <li><a href="#harga" class="nav-link">Harga</a></li>
+            <li><a href="#testimoni" class="nav-link">Testimoni</a></li>
+            <li><a href="#kontak" class="nav-link">Kontak</a></li>
+          </ul>
+          <a href="#kontak" class="btn btn-primary nav-cta" data-plan="Starter (Gratis)">Mulai Sekarang</a>
+        </nav>
+
+        <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="konten-utama">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="beranda">
+        <div class="hero-bg" aria-hidden="true">
+          <span class="blob blob-1"></span>
+          <span class="blob blob-2"></span>
+          <span class="grid-pattern"></span>
+        </div>
+
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow reveal"><svg><use href="#i-sparkle" /></svg> Study Smarter. Stay Organized. Achieve More.</span>
+            <h1 class="reveal">Tugas rapi, jadwal jelas, <span class="grad-text">nilai ikut naik.</span></h1>
+            <p class="lead reveal">
+              StudyFlow adalah study planner digital yang dirancang khusus untuk pelajar SMA Indonesia. Atur tugas, pantau deadline,
+              susun jadwal belajar, dan lihat progresmu bertumbuh — semuanya di satu tempat.
+            </p>
+            <div class="hero-actions reveal">
+              <a href="#kontak" class="btn btn-primary btn-lg" data-plan="Starter (Gratis)">
+                Mulai Sekarang <svg class="btn-icon"><use href="#i-arrow" /></svg>
+              </a>
+              <a href="#fitur" class="btn btn-ghost btn-lg">Jelajahi StudyFlow</a>
+            </div>
+            <ul class="hero-points reveal">
+              <li><svg><use href="#i-check" /></svg> Gratis untuk memulai</li>
+              <li><svg><use href="#i-check" /></svg> Tanpa kartu kredit</li>
+              <li><svg><use href="#i-check" /></svg> Cocok untuk kelas X–XII</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal" aria-label="Contoh tampilan dashboard StudyFlow">
+            <div class="float-card float-reminder">
+              <span class="fc-icon fc-icon-amber"><svg><use href="#i-bell" /></svg></span>
+              <div>
+                <strong>Pengingat</strong>
+                <small>Laporan Biologi — besok 07.00</small>
+              </div>
+            </div>
+            <div class="float-card float-streak">
+              <span class="fc-icon fc-icon-violet"><svg><use href="#i-flame" /></svg></span>
+              <div>
+                <strong>7 hari beruntun</strong>
+                <small>Konsisten belajar!</small>
+              </div>
+            </div>
+
+            <div class="device">
+              <div class="device-bar">
+                <span></span><span></span><span></span>
+                <em>app.studyflow.id</em>
+              </div>
+              <div class="device-body">
+                <aside class="mini-side" aria-hidden="true">
+                  <span class="ms-logo"><svg><use href="#i-logo" /></svg></span>
+                  <span class="ms-item active"><svg><use href="#i-home" /></svg></span>
+                  <span class="ms-item"><svg><use href="#i-tasks" /></svg></span>
+                  <span class="ms-item"><svg><use href="#i-calendar" /></svg></span>
+                  <span class="ms-item"><svg><use href="#i-chart" /></svg></span>
+                </aside>
+                <div class="mini-main">
+                  <div class="mini-head">
+                    <div>
+                      <small>Selasa, hari ini</small>
+                      <h3>Halo, Alya! 👋</h3>
+                    </div>
+                    <span class="avatar">A</span>
+                  </div>
+
+                  <div class="mini-stats">
+                    <div class="stat stat-violet"><small>Tugas aktif</small><strong>8</strong></div>
+                    <div class="stat stat-blue"><small>Deadline terdekat</small><strong>1 hari</strong></div>
+                    <div class="stat stat-white">
+                      <small>Progres minggu ini</small>
+                      <strong>72%</strong>
+                    </div>
+                  </div>
+
+                  <div class="mini-panels">
+                    <div class="panel">
+                      <h4>Prioritas hari ini</h4>
+                      <ul class="mini-tasks">
+                        <li class="done"><i></i><span>Rangkum Bab 4 Sejarah</span><b class="tag tag-green">Selesai</b></li>
+                        <li><i></i><span>Laporan praktikum Biologi</span><b class="tag tag-red">Besok</b></li>
+                        <li><i></i><span>Latihan soal Matematika</span><b class="tag tag-blue">Kamis</b></li>
+                      </ul>
+                    </div>
+                    <div class="panel panel-ring">
+                      <div class="ring" style="--p: 72">
+                        <span>72%</span>
+                      </div>
+                      <small>Target mingguan</small>
+                    </div>
+                  </div>
+
+                  <div class="panel week-chart">
+                    <h4>Jam belajar</h4>
+                    <div class="bars" aria-hidden="true">
+                      <span style="--h: 45%"><em>S</em></span>
+                      <span style="--h: 70%"><em>S</em></span>
+                      <span style="--h: 55%"><em>R</em></span>
+                      <span style="--h: 90%" class="hot"><em>K</em></span>
+                      <span style="--h: 65%"><em>J</em></span>
+                      <span style="--h: 35%"><em>S</em></span>
+                      <span style="--h: 50%"><em>M</em></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <ul class="trust-strip reveal">
+            <li><strong>1 tempat</strong><span>untuk semua tugas &amp; jadwal</span></li>
+            <li><strong>Pengingat otomatis</strong><span>supaya deadline tak terlewat</span></li>
+            <li><strong>Progres visual</strong><span>belajar jadi lebih termotivasi</span></li>
+            <li><strong>Dibuat untuk pelajar</strong><span>mudah dipakai dari ponsel</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ VALUE PROPOSITION ============ -->
+      <section class="section" id="manfaat">
+        <div class="container split">
+          <div class="split-visual reveal">
+            <div class="photo-frame">
+              <img
+                src="./assets/siswa-belajar.jpg"
+                alt="Dua siswa SMA belajar bersama di meja yang rapi dengan laptop, buku catatan, dan sticky notes berwarna"
+                width="900"
+                height="900"
+                loading="lazy"
+              />
+            </div>
+            <div class="photo-chip chip-a"><svg><use href="#i-check" /></svg> 3 tugas selesai hari ini</div>
+            <div class="photo-chip chip-b"><svg><use href="#i-bell" /></svg> Deadline besok: 1 tugas</div>
+          </div>
+
+          <div class="split-copy">
+            <span class="section-tag reveal">Kenapa StudyFlow?</span>
+            <h2 class="reveal">Belajar bukan soal lebih lama, tapi <span class="grad-text">lebih teratur.</span></h2>
+            <p class="section-lead reveal">
+              Catatan tercecer, jadwal bentrok, dan tugas yang baru diingat malam sebelum dikumpulkan — kami paham rasanya.
+              StudyFlow merapikan semuanya agar kamu bisa fokus belajar, bukan sibuk mengingat.
+            </p>
+
+            <ul class="value-list">
+              <li class="reveal">
+                <span class="v-icon"><svg><use href="#i-layers" /></svg></span>
+                <div>
+                  <h3>Tetap terorganisir</h3>
+                  <p>Semua tugas dari tiap mata pelajaran terkumpul rapi di satu dasbor, bukan di lima aplikasi berbeda.</p>
+                </div>
+              </li>
+              <li class="reveal">
+                <span class="v-icon"><svg><use href="#i-clock" /></svg></span>
+                <div>
+                  <h3>Kelola waktu dengan bijak</h3>
+                  <p>Bagi waktu antara sekolah, les, organisasi, dan istirahat dengan jadwal yang realistis.</p>
+                </div>
+              </li>
+              <li class="reveal">
+                <span class="v-icon"><svg><use href="#i-bell" /></svg></span>
+                <div>
+                  <h3>Tak ada lagi deadline terlewat</h3>
+                  <p>Pengingat bertahap membantumu bersiap jauh sebelum hari pengumpulan tiba.</p>
+                </div>
+              </li>
+              <li class="reveal">
+                <span class="v-icon"><svg><use href="#i-target" /></svg></span>
+                <div>
+                  <h3>Bangun kebiasaan belajar</h3>
+                  <p>Target mingguan dan streak harian membuat konsistensi terasa menyenangkan.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="compare reveal">
+            <div class="compare-col compare-before">
+              <h3>Tanpa StudyFlow</h3>
+              <ul>
+                <li><svg><use href="#i-x" /></svg> Tugas dicatat di banyak tempat</li>
+                <li><svg><use href="#i-x" /></svg> Baru ingat deadline saat H-1</li>
+                <li><svg><use href="#i-x" /></svg> Jadwal belajar berubah-ubah</li>
+                <li><svg><use href="#i-x" /></svg> Sulit tahu sudah sejauh mana belajarnya</li>
+              </ul>
+            </div>
+            <div class="compare-col compare-after">
+              <h3>Dengan StudyFlow</h3>
+              <ul>
+                <li><svg><use href="#i-check" /></svg> Semua tugas terpusat dan terurut prioritas</li>
+                <li><svg><use href="#i-check" /></svg> Pengingat otomatis jauh-jauh hari</li>
+                <li><svg><use href="#i-check" /></svg> Jadwal mingguan yang jelas dan fleksibel</li>
+                <li><svg><use href="#i-check" /></svg> Progres belajar terlihat dalam grafik</li>
+              </ul>
+              <a href="#kontak" class="btn btn-light" data-plan="Starter (Gratis)">Coba StudyFlow Gratis</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FEATURES ============ -->
+      <section class="section section-tint" id="fitur">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-tag">Fitur &amp; Manfaat</span>
+            <h2>Empat fitur inti untuk <span class="grad-text">hari-harimu di sekolah</span></h2>
+            <p class="section-lead">Sederhana, cepat, dan benar-benar berguna. Tidak ada fitur rumit yang membuatmu malas membuka aplikasi.</p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <span class="f-icon f-violet"><svg><use href="#i-tasks" /></svg></span>
+              <h3>Manajemen Tugas</h3>
+              <p>Catat PR, proyek, dan ulangan per mata pelajaran. Beri prioritas, centang saat selesai, dan lihat daftar tugas yang paling mendesak lebih dulu.</p>
+              <ul class="f-list">
+                <li><svg><use href="#i-check" /></svg> Kategori per mata pelajaran</li>
+                <li><svg><use href="#i-check" /></svg> Label prioritas berwarna</li>
+              </ul>
+              <span class="f-benefit">Manfaat: tidak ada tugas yang terlupa</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="f-icon f-blue"><svg><use href="#i-bell" /></svg></span>
+              <h3>Pelacak Deadline</h3>
+              <p>Kalender dan hitung mundur otomatis menampilkan tenggat terdekat. Pengingat dikirim bertahap supaya kamu punya waktu bersiap.</p>
+              <ul class="f-list">
+                <li><svg><use href="#i-check" /></svg> Hitung mundur otomatis</li>
+                <li><svg><use href="#i-check" /></svg> Pengingat H-3, H-1, dan hari-H</li>
+              </ul>
+              <span class="f-benefit">Manfaat: bebas panik di malam sebelum kumpul</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="f-icon f-indigo"><svg><use href="#i-calendar" /></svg></span>
+              <h3>Jadwal Belajar</h3>
+              <p>Susun jadwal mingguan yang seimbang antara jam sekolah, belajar mandiri, les, dan istirahat. Geser blok waktu kapan pun rencanamu berubah.</p>
+              <ul class="f-list">
+                <li><svg><use href="#i-check" /></svg> Tampilan mingguan yang rapi</li>
+                <li><svg><use href="#i-check" /></svg> Blok waktu mudah disesuaikan</li>
+              </ul>
+              <span class="f-benefit">Manfaat: waktu terpakai lebih efektif</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="f-icon f-sky"><svg><use href="#i-chart" /></svg></span>
+              <h3>Progres Belajar</h3>
+              <p>Grafik jam belajar, persentase tugas selesai, dan target mingguan membantumu melihat perkembangan nyata dari minggu ke minggu.</p>
+              <ul class="f-list">
+                <li><svg><use href="#i-check" /></svg> Ringkasan mingguan visual</li>
+                <li><svg><use href="#i-check" /></svg> Streak belajar harian</li>
+              </ul>
+              <span class="f-benefit">Manfaat: motivasi yang terus terjaga</span>
+            </article>
+          </div>
+
+          <div class="steps">
+            <h3 class="steps-title reveal">Mulai dalam 3 langkah mudah</h3>
+            <ol class="steps-list">
+              <li class="reveal"><span class="step-num">1</span><div><h4>Buat akun</h4><p>Daftar dalam hitungan menit dan pilih kelasmu.</p></div></li>
+              <li class="reveal"><span class="step-num">2</span><div><h4>Masukkan tugas &amp; jadwal</h4><p>Tambahkan mata pelajaran, tugas, dan tenggatnya.</p></div></li>
+              <li class="reveal"><span class="step-num">3</span><div><h4>Ikuti alurnya</h4><p>Biarkan StudyFlow mengingatkan dan memantau progresmu.</p></div></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DASHBOARD PREVIEW ============ -->
+      <section class="section section-dark" id="pratinjau">
+        <div class="dark-glow" aria-hidden="true"></div>
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-tag section-tag-light">Pratinjau Dasbor</span>
+            <h2>Lihat bagaimana StudyFlow <span class="grad-text-light">bekerja</span></h2>
+            <p class="section-lead">Klik tab di bawah untuk menjelajahi tampilan setiap fitur. Ini adalah pratinjau promosi dengan data contoh.</p>
+          </div>
+
+          <div class="preview-tabs reveal" role="tablist" aria-label="Pilih tampilan fitur StudyFlow">
+            <button class="ptab active" role="tab" id="tab-tugas" aria-selected="true" aria-controls="panel-tugas" data-tab="tugas"><svg><use href="#i-tasks" /></svg> Tugas</button>
+            <button class="ptab" role="tab" id="tab-deadline" aria-selected="false" aria-controls="panel-deadline" data-tab="deadline" tabindex="-1"><svg><use href="#i-bell" /></svg> Deadline</button>
+            <button class="ptab" role="tab" id="tab-jadwal" aria-selected="false" aria-controls="panel-jadwal" data-tab="jadwal" tabindex="-1"><svg><use href="#i-calendar" /></svg> Jadwal</button>
+            <button class="ptab" role="tab" id="tab-progres" aria-selected="false" aria-controls="panel-progres" data-tab="progres" tabindex="-1"><svg><use href="#i-chart" /></svg> Progres</button>
+          </div>
+
+          <div class="app-window reveal">
+            <div class="app-top">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <div class="app-search" aria-hidden="true">Cari tugas, mapel, atau jadwal…</div>
+              <span class="avatar">A</span>
+            </div>
+
+            <!-- Panel Tugas -->
+            <div class="app-panel active" role="tabpanel" id="panel-tugas" aria-labelledby="tab-tugas">
+              <div class="app-panel-head">
+                <div>
+                  <h3>Daftar Tugas</h3>
+                  <p><span id="task-count">2</span> dari 5 tugas selesai — coba centang salah satu!</p>
+                </div>
+                <div class="progress-pill"><span id="task-bar" style="width: 40%"></span></div>
+              </div>
+              <ul class="task-list" id="task-list">
+                <li>
+                  <label class="task done">
+                    <input type="checkbox" checked />
+                    <span class="check"><svg><use href="#i-check" /></svg></span>
+                    <span class="task-text"><b>Rangkum Bab 4 — Sejarah Indonesia</b><small>Sejarah</small></span>
+                    <span class="tag tag-green">Selesai</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="task">
+                    <input type="checkbox" />
+                    <span class="check"><svg><use href="#i-check" /></svg></span>
+                    <span class="task-text"><b>Laporan praktikum Biologi</b><small>Biologi · Prioritas tinggi</small></span>
+                    <span class="tag tag-red">Besok</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="task">
+                    <input type="checkbox" />
+                    <span class="check"><svg><use href="#i-check" /></svg></span>
+                    <span class="task-text"><b>Latihan soal Matematika — Trigonometri</b><small>Matematika</small></span>
+                    <span class="tag tag-amber">Kamis</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="task done">
+                    <input type="checkbox" checked />
+                    <span class="check"><svg><use href="#i-check" /></svg></span>
+                    <span class="task-text"><b>Kosakata Bahasa Inggris Unit 6</b><small>Bahasa Inggris</small></span>
+                    <span class="tag tag-green">Selesai</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="task">
+                    <input type="checkbox" />
+                    <span class="check"><svg><use href="#i-check" /></svg></span>
+                    <span class="task-text"><b>Proyek kelompok Informatika</b><small>Informatika · Kelompok</small></span>
+                    <span class="tag tag-blue">Minggu depan</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Panel Deadline -->
+            <div class="app-panel" role="tabpanel" id="panel-deadline" aria-labelledby="tab-deadline" hidden>
+              <div class="app-panel-head">
+                <div>
+                  <h3>Pelacak Deadline</h3>
+                  <p>Kalender bulan ini beserta tenggat terdekatmu.</p>
+                </div>
+              </div>
+              <div class="deadline-grid">
+                <div class="calendar">
+                  <div class="cal-title" id="cal-title">Bulan ini</div>
+                  <div class="cal-days" aria-hidden="true">
+                    <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
+                  </div>
+                  <div class="cal-grid" id="cal-grid" role="grid" aria-label="Kalender contoh dengan penanda deadline"></div>
+                </div>
+                <ul class="deadline-list">
+                  <li class="dl dl-red">
+                    <span class="dl-count"><b>1</b><small>hari</small></span>
+                    <div><h4>Laporan praktikum Biologi</h4><p>Pengingat aktif · 07.00</p></div>
+                  </li>
+                  <li class="dl dl-amber">
+                    <span class="dl-count"><b>3</b><small>hari</small></span>
+                    <div><h4>Latihan soal Matematika</h4><p>Pengingat H-1 dijadwalkan</p></div>
+                  </li>
+                  <li class="dl dl-blue">
+                    <span class="dl-count"><b>6</b><small>hari</small></span>
+                    <div><h4>Proyek kelompok Informatika</h4><p>Bersama 3 anggota tim</p></div>
+                  </li>
+                  <li class="dl dl-violet">
+                    <span class="dl-count"><b>9</b><small>hari</small></span>
+                    <div><h4>Ulangan Harian Kimia</h4><p>Bab Larutan &amp; Asam Basa</p></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Panel Jadwal -->
+            <div class="app-panel" role="tabpanel" id="panel-jadwal" aria-labelledby="tab-jadwal" hidden>
+              <div class="app-panel-head">
+                <div>
+                  <h3>Jadwal Belajar Mingguan</h3>
+                  <p>Seimbang antara sekolah, belajar mandiri, dan istirahat.</p>
+                </div>
+                <ul class="legend">
+                  <li><i class="lg-violet"></i>Belajar</li>
+                  <li><i class="lg-blue"></i>Sekolah</li>
+                  <li><i class="lg-green"></i>Istirahat</li>
+                </ul>
+              </div>
+              <div class="schedule">
+                <div class="day">
+                  <h4>Senin</h4>
+                  <span class="block b-blue">07.00 · Sekolah</span>
+                  <span class="block b-violet">16.00 · Matematika</span>
+                  <span class="block b-green">19.00 · Santai</span>
+                </div>
+                <div class="day">
+                  <h4>Selasa</h4>
+                  <span class="block b-blue">07.00 · Sekolah</span>
+                  <span class="block b-violet">16.00 · Biologi</span>
+                  <span class="block b-violet">19.30 · Latihan soal</span>
+                </div>
+                <div class="day">
+                  <h4>Rabu</h4>
+                  <span class="block b-blue">07.00 · Sekolah</span>
+                  <span class="block b-violet">15.30 · Sejarah</span>
+                  <span class="block b-green">18.00 · Olahraga</span>
+                </div>
+                <div class="day">
+                  <h4>Kamis</h4>
+                  <span class="block b-blue">07.00 · Sekolah</span>
+                  <span class="block b-violet">16.00 · Informatika</span>
+                  <span class="block b-violet">19.00 · B. Inggris</span>
+                </div>
+                <div class="day">
+                  <h4>Jumat</h4>
+                  <span class="block b-blue">07.00 · Sekolah</span>
+                  <span class="block b-violet">16.00 · Kimia</span>
+                  <span class="block b-green">19.00 · Waktu bebas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel Progres -->
+            <div class="app-panel" role="tabpanel" id="panel-progres" aria-labelledby="tab-progres" hidden>
+              <div class="app-panel-head">
+                <div>
+                  <h3>Progres Belajar</h3>
+                  <p>Pantau perkembanganmu minggu ini.</p>
+                </div>
+              </div>
+              <div class="progress-grid">
+                <div class="prog-card prog-ring">
+                  <div class="ring ring-lg" style="--p: 72"><span>72%</span></div>
+                  <h4>Target mingguan</h4>
+                  <p>18 dari 25 tugas &amp; sesi belajar selesai</p>
+                </div>
+                <div class="prog-card">
+                  <h4>Penguasaan per mapel</h4>
+                  <ul class="meters">
+                    <li><span>Matematika</span><div class="meter"><i style="--w: 78%"></i></div><b>78%</b></li>
+                    <li><span>Biologi</span><div class="meter"><i style="--w: 64%"></i></div><b>64%</b></li>
+                    <li><span>Sejarah</span><div class="meter"><i style="--w: 90%"></i></div><b>90%</b></li>
+                    <li><span>B. Inggris</span><div class="meter"><i style="--w: 85%"></i></div><b>85%</b></li>
+                    <li><span>Informatika</span><div class="meter"><i style="--w: 55%"></i></div><b>55%</b></li>
+                  </ul>
+                </div>
+                <div class="prog-card prog-streak">
+                  <span class="streak-icon"><svg><use href="#i-flame" /></svg></span>
+                  <strong>7 hari</strong>
+                  <p>Streak belajar beruntun. Pertahankan ritmemu!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="center-cta reveal">
+            <a href="#kontak" class="btn btn-light btn-lg" data-plan="Starter (Gratis)">Mulai Sekarang <svg class="btn-icon"><use href="#i-arrow" /></svg></a>
+            <a href="#harga" class="btn btn-outline-light btn-lg">Lihat Paket Harga</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRICING ============ -->
+      <section class="section" id="harga">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-tag">Paket Harga</span>
+            <h2>Pilih paket yang <span class="grad-text">pas untukmu</span></h2>
+            <p class="section-lead">Mulai gratis, upgrade kapan saja. Harga di bawah adalah contoh usulan fiktif untuk keperluan tugas.</p>
+
+            <div class="billing" role="group" aria-label="Pilih periode tagihan">
+              <button class="bill-btn active" data-billing="monthly" aria-pressed="true">Bulanan</button>
+              <button class="bill-btn" data-billing="yearly" aria-pressed="false">Tahunan <em>Hemat 20%</em></button>
+            </div>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="price-card reveal">
+              <h3>Starter</h3>
+              <p class="price-desc">Untuk kamu yang baru ingin mulai lebih teratur.</p>
+              <div class="price"><span class="cur">Rp</span><strong>0</strong><span class="per">/ selamanya</span></div>
+              <p class="price-note">Tanpa biaya, tanpa batas waktu</p>
+              <ul class="price-list">
+                <li><svg><use href="#i-check" /></svg> Hingga 20 tugas aktif</li>
+                <li><svg><use href="#i-check" /></svg> Pelacak deadline dasar</li>
+                <li><svg><use href="#i-check" /></svg> Jadwal belajar mingguan</li>
+                <li class="off"><svg><use href="#i-x" /></svg> Analitik progres lanjutan</li>
+              </ul>
+              <a href="#kontak" class="btn btn-outline" data-plan="Starter (Gratis)">Mulai Gratis</a>
+            </article>
+
+            <article class="price-card featured reveal">
+              <span class="badge-pop"><svg><use href="#i-star" /></svg> Paling Populer</span>
+              <h3>Pelajar Pro</h3>
+              <p class="price-desc">Semua yang dibutuhkan untuk belajar maksimal.</p>
+              <div class="price">
+                <span class="cur">Rp</span><strong data-monthly="29.000" data-yearly="23.000">29.000</strong><span class="per">/ bulan</span>
+              </div>
+              <p class="price-note" data-monthly="Ditagih bulanan" data-yearly="Ditagih Rp276.000 per tahun">Ditagih bulanan</p>
+              <ul class="price-list">
+                <li><svg><use href="#i-check" /></svg> Tugas &amp; mapel tanpa batas</li>
+                <li><svg><use href="#i-check" /></svg> Pengingat pintar H-3, H-1, hari-H</li>
+                <li><svg><use href="#i-check" /></svg> Analitik &amp; grafik progres lengkap</li>
+                <li><svg><use href="#i-check" /></svg> Target mingguan &amp; streak belajar</li>
+              </ul>
+              <a href="#kontak" class="btn btn-primary" data-plan="Pelajar Pro">Pilih Pelajar Pro</a>
+            </article>
+
+            <article class="price-card reveal">
+              <h3>Squad</h3>
+              <p class="price-desc">Untuk kelompok belajar hingga 5 teman.</p>
+              <div class="price">
+                <span class="cur">Rp</span><strong data-monthly="79.000" data-yearly="63.000">79.000</strong><span class="per">/ bulan</span>
+              </div>
+              <p class="price-note" data-monthly="Ditagih bulanan · untuk 5 akun" data-yearly="Ditagih Rp756.000 per tahun · 5 akun">Ditagih bulanan · untuk 5 akun</p>
+              <ul class="price-list">
+                <li><svg><use href="#i-check" /></svg> Semua fitur Pelajar Pro</li>
+                <li><svg><use href="#i-check" /></svg> Papan tugas kelompok bersama</li>
+                <li><svg><use href="#i-check" /></svg> Jadwal belajar bareng</li>
+                <li><svg><use href="#i-check" /></svg> Prioritas dukungan</li>
+              </ul>
+              <a href="#kontak" class="btn btn-outline" data-plan="Squad">Pilih Squad</a>
+            </article>
+          </div>
+          <p class="fine-print reveal">* Semua harga dan paket adalah contoh fiktif untuk tugas Pemasaran Digital, bukan penawaran sebenarnya.</p>
+        </div>
+      </section>
+
+      <!-- ============ TESTIMONIALS ============ -->
+      <section class="section section-tint" id="testimoni">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="section-tag">Testimoni</span>
+            <h2>Seperti inilah <span class="grad-text">pengalaman yang kami targetkan</span></h2>
+            <p class="section-lead">Kutipan berikut adalah <strong>contoh placeholder</strong> untuk menggambarkan nada dan manfaat produk — bukan ulasan pelanggan nyata.</p>
+          </div>
+
+          <div class="testi-grid">
+            <figure class="testi reveal">
+              <span class="sample-badge">Contoh testimoni</span>
+              <div class="stars" aria-label="Contoh penilaian 5 dari 5">
+                <svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg>
+              </div>
+              <blockquote>“Sebelumnya aku sering lupa kumpul tugas. Dengan pengingat yang rapi, jadwal harianku jadi jauh lebih tenang.”</blockquote>
+              <figcaption>
+                <span class="avatar av-1">N</span>
+                <div><strong>[Nama Siswa 1]</strong><small>Siswi Kelas X — [Nama Sekolah]</small></div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi testi-highlight reveal">
+              <span class="sample-badge">Contoh testimoni</span>
+              <div class="stars" aria-label="Contoh penilaian 5 dari 5">
+                <svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg>
+              </div>
+              <blockquote>“Menjelang ujian, aku bisa lihat bab mana yang sudah dikuasai dan mana yang perlu diulang. Belajar jadi lebih terarah.”</blockquote>
+              <figcaption>
+                <span class="avatar av-2">R</span>
+                <div><strong>[Nama Siswa 2]</strong><small>Siswa Kelas XI — [Nama Sekolah]</small></div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi reveal">
+              <span class="sample-badge">Contoh testimoni</span>
+              <div class="stars" aria-label="Contoh penilaian 5 dari 5">
+                <svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg><svg><use href="#i-star" /></svg>
+              </div>
+              <blockquote>“Papan tugas kelompoknya membuat pembagian kerja proyek jadi jelas. Tidak ada lagi saling menunggu di grup chat.”</blockquote>
+              <figcaption>
+                <span class="avatar av-3">D</span>
+                <div><strong>[Nama Siswa 3]</strong><small>Siswi Kelas XII — [Nama Sekolah]</small></div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="section section-faq" id="faq">
+        <div class="container narrow">
+          <div class="section-head reveal">
+            <span class="section-tag">Tanya Jawab</span>
+            <h2>Pertanyaan yang sering <span class="grad-text">ditanyakan</span></h2>
+          </div>
+          <div class="faq reveal">
+            <details>
+              <summary>Apakah StudyFlow benar-benar gratis?</summary>
+              <p>Paket Starter bisa dipakai gratis tanpa batas waktu. Kamu hanya perlu upgrade jika membutuhkan fitur lanjutan seperti analitik progres dan tugas tanpa batas.</p>
+            </details>
+            <details>
+              <summary>Apakah cocok untuk semua jurusan SMA?</summary>
+              <p>Tentu. Kamu bebas menambahkan mata pelajaran sendiri, baik untuk IPA, IPS, Bahasa, maupun kelas peminatan lainnya.</p>
+            </details>
+            <details>
+              <summary>Bisakah dipakai dari ponsel?</summary>
+              <p>Ya. Tampilan StudyFlow dirancang responsif agar nyaman dibuka dari ponsel, tablet, maupun laptop.</p>
+            </details>
+            <details>
+              <summary>Apakah produk ini sungguhan?</summary>
+              <p>StudyFlow adalah produk fiktif yang dibuat untuk tugas Pemasaran Digital Kelas XII RPL. Halaman ini merupakan promosi konsep, bukan layanan yang benar-benar tersedia.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT & CTA ============ -->
+      <section class="section cta-section" id="kontak">
+        <div class="container">
+          <div class="cta-card">
+            <div class="cta-glow" aria-hidden="true"></div>
+            <div class="cta-copy">
+              <span class="section-tag section-tag-light">Mulai Sekarang</span>
+              <h2>Siap belajar lebih teratur mulai hari ini?</h2>
+              <p>Tinggalkan datamu dan pilih paket yang diminati. Kami akan membantu kamu memulai langkah pertama bersama StudyFlow.</p>
+
+              <ul class="contact-list">
+                <li><svg><use href="#i-mail" /></svg><a href="mailto:halo@studyflow.example" data-contact="email-link"><span data-contact="email">halo@studyflow.example</span></a></li>
+                <li><svg><use href="#i-chat" /></svg><a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" data-contact="wa-link"><span data-contact="wa">+62 812-3456-7890</span></a></li>
+                <li><svg><use href="#i-pin" /></svg><span data-contact="address">[Alamat sekolah / kota Anda]</span></li>
+              </ul>
+
+              <div class="cta-buttons">
+                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="btn btn-light" data-contact="wa-link">Chat via WhatsApp</a>
+                <a href="#fitur" class="btn btn-outline-light">Jelajahi StudyFlow</a>
+              </div>
+            </div>
+
+            <form class="contact-form" id="contact-form" novalidate>
+              <h3>Daftar Minat</h3>
+              <div class="field">
+                <label for="f-nama">Nama lengkap</label>
+                <input id="f-nama" name="nama" type="text" autocomplete="name" placeholder="Contoh: Alya Putri" required />
+                <small class="err" data-for="f-nama"></small>
+              </div>
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" placeholder="nama@email.com" required />
+                <small class="err" data-for="f-email"></small>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-kelas">Kelas</label>
+                  <select id="f-kelas" name="kelas">
+                    <option>Kelas X</option>
+                    <option>Kelas XI</option>
+                    <option selected>Kelas XII</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="f-paket">Paket</label>
+                  <select id="f-paket" name="paket">
+                    <option>Starter (Gratis)</option>
+                    <option>Pelajar Pro</option>
+                    <option>Squad</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-pesan">Pesan (opsional)</label>
+                <textarea id="f-pesan" name="pesan" rows="3" placeholder="Ceritakan tantangan belajarmu…"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Mulai Sekarang <svg class="btn-icon"><use href="#i-arrow" /></svg></button>
+              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+              <p class="form-note">Tombol ini akan membuka aplikasi emailmu dengan pesan yang sudah terisi. Tidak ada data yang disimpan di server.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a href="#beranda" class="brand brand-light" aria-label="StudyFlow — kembali ke atas">
+            <span class="brand-mark"><svg><use href="#i-logo" /></svg></span>
+            <span class="brand-name">StudyFlow</span>
+          </a>
+          <p>Study planner digital untuk pelajar SMA Indonesia. Atur tugas, kelola waktu, dan raih lebih banyak — dari satu tempat.</p>
+          <div class="socials">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" data-contact="instagram">Instagram</a>
+            <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" data-contact="tiktok">TikTok</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" data-contact="youtube">YouTube</a>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Navigasi footer">
+          <h4>Jelajahi</h4>
+          <ul>
+            <li><a href="#manfaat">Manfaat</a></li>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#pratinjau">Pratinjau Dasbor</a></li>
+            <li><a href="#harga">Harga</a></li>
+            <li><a href="#faq">Tanya Jawab</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <ul>
+            <li><a href="mailto:halo@studyflow.example" data-contact="email-link"><span data-contact="email">halo@studyflow.example</span></a></li>
+            <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" data-contact="wa-link"><span data-contact="wa">+62 812-3456-7890</span></a></li>
+            <li><span data-contact="address">[Alamat sekolah / kota Anda]</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>© <span id="year">2025</span> StudyFlow. Proyek fiktif untuk tugas Pemasaran Digital Kelas XII RPL.</p>
+        <a href="#beranda" class="to-top">Kembali ke atas ↑</a>
+      </div>
+    </footer>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
